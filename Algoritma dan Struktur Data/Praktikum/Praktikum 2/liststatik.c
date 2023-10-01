@@ -200,7 +200,7 @@ void extremeValues(ListStatik l, ElType *max, ElType *min){
     int i = IDX_MIN;
     *max = ELMT(l,i);
     *min = ELMT(l,i);
-    for(i; i < listLength(l); i++){
+    for(i = IDX_MIN; i < listLength(l); i++){
         if(ELMT(l,i)>*max){
             *max = ELMT(l,i);
         }
