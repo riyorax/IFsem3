@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "datetime.h": "c",
+        "garis.h": "c"
+    }
+}
