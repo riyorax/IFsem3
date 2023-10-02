@@ -15,15 +15,23 @@ int main(){
             if(element >= 10){
                 temp = element/10;
                 element = element%10;
+            }else{
+                temp = 0;
             }
             insertFirst(&L3, element);
             j +=1;
         }
         for (i = getLastIdx(L1)-j; i >=getFirstIdx(L1) ; i--){
-            insertFirst(&L3, ELMT(L1,i));
-            temp = 0;
+            element = ELMT(L1, i) + temp;
+            if (element >= 10) {
+                temp = element / 10;
+                element = element % 10;
+            } else {
+                temp = 0;
+            }
+            insertFirst(&L3, element);
         }
-        if(temp>0){
+        if (temp > 0) {
             insertFirst(&L3, temp);
         }
     } else{
@@ -34,16 +42,23 @@ int main(){
             if(element >= 10){
                 temp = element/10;
                 element = element%10;
+            }else{
+                temp = 0;
             }
             insertFirst(&L3, element);
             j +=1;
         }
         for (i = getLastIdx(L2)-j; i >=getFirstIdx(L2) ; i--){
-            insertFirst(&L3, ELMT(L2,i));
-            temp = 0;
-            j -=1;
+            element = ELMT(L2, i) + temp;
+            if (element >= 10) {
+                temp = element / 10;
+                element = element % 10;
+            } else {
+                temp = 0;
+            }
+            insertFirst(&L3, element);
         }
-        if(temp>0){
+        if (temp > 0) {
             insertFirst(&L3, temp);
         }
     }
