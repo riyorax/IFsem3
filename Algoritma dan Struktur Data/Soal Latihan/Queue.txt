@@ -1,0 +1,122 @@
+No 1
+
+constant CAPACITY: integer = 100
+constant IDX_UNDEF: integer = -1
+
+type ElType <id: integer,
+     cost: integer>
+type Queue < buffer: array [0..CAPACITY-1] of ElType,
+        head : integer,
+        count: integer>
+
+function isFull (q: Queue) → boolean
+{mengirim true jika q penuh}
+Kamus Lokal
+Algoritma
+ -> (q.count = CAPACITY)
+
+procedure enqueue (input/output q: Queue, input val: ElType)
+{Proses: menambahkan val pada q sebagai Tail baru}
+{IS: q mungkin kosong, q tidak penuh}
+{FS: val menjadi Tail baru dengan mekanisme circular buffer}
+Algoritma
+    if q.count = 0 then
+        q.head <- 0 
+    q.buffer[(q.head+q.count) mod CAPACITY] <- val
+    count <- count + 1
+
+procedure dequeue (input/output q: Queue, output val: ElType)
+{Proses: menyimpan nilai Head q ke val dan menghapus Head q}
+{IS: q tidak kosong}
+{FS: val adalah nilai elemen Head, Head “bergerak” dengan mekanisme circular buffer. q mungkin kosong}
+Kamus Lokal
+Algoritma
+    val <- q.buffer[Queue.head]
+    if q.count = 1 then
+        q.head <- IDX_UNDEF
+    else
+        q.head <- (q.head+1) mod CAPACITY
+    q.count <- q.count -1
+
+No 2
+
+procedure roundRobin (input/output q: Queue, input t: integer)
+{Proses: memproses elemen antrian q secara round robin}
+{IS: q tidak kosong, t adalah waktu yang tersedia untuk memproses setiap elemen}
+{FS: elemen e pada posisi HEAD dihapus dari q.
+Jika cost e ≤ t maka ditampilkan “<id> telah selesai diproses”.
+Jika cost e > t maka e disisipkan kembali sebagai tail q
+dengan cost berkurang sebesar t }
+Kamus Lokal
+val: ElType
+Algoritma
+    while count>0 do
+        dequeue(q,val)
+        if val.cost <= t then
+            output(val.id “telah selesai diproses”)
+        else
+            val.cost <- val.cost-t
+            enqueue(q,val)
+
+No 3
+constant CAPACITY: integer = 100
+constant IDX_UNDEF: integer = -1
+
+type ElType <id: integer,
+    cost: integer>
+
+type Queue < buffer: array [0..CAPACITY-1] of ElType,
+       head : integer,
+       tail: integer>
+
+procedure enqueue (input/output q: Queue, input val: ElType)
+{Proses: menambahkan val sebagai elemen baru di q, dengan
+         memperhatikan lamanya waktu pekerjaan tsb dapat
+         diselesaikan, yaitu pekerjaan yang lebih cost diletakkan
+         lebih akhir. Jika ada 2 pekerjaan yang cost waktunya sama,
+         pekerjaan terakhir yang baru datang disisipkan lebih
+         belakang}
+{IS: q mungkin kosong, q tidak penuh}
+{FS: val menjadi elemen q yang baru dengan urutan waktu pekerjaan membesar}
+Kamus Lokal
+i,j : integer
+found : boolean
+Algoritma
+    if (isEmpty(q)) then
+        q.head <-0
+        q.tail <-0
+        q.buffer <- val
+    else
+        if (q.tail = CAPACITY-1) then
+            i traversal [q.head..q.tail]
+                q.buffer[i-q.head] <- q.buffer[i]
+            q.tail <-q.tail-q.head
+            q.head <-0
+        found <- false
+        i <- 0
+        while i<q.tail and not found do
+            if q.buffer[i].cost = val.cost then
+                i <- i+1
+                found <- true
+            else 
+                if q.buffer[i].cost < val.cost then
+                    found <-true
+                else
+                    i <- i+1
+        j traversal [q.tail..i]
+            q.buffer[j] <- q.buffer[j-1]
+        q.tail <- q.tail +1
+        q.buffer[i] <- val
+
+procedure dequeue (input/output q: Queue, output val: ElType)
+{Proses: menyimpan IDX_UNDEFa head q pada val dan menghapus head dari q} 
+{IS: q tidak kosong}
+{FS: elemen pada HEAD dihapus, dan disimpan nilainya pada val}
+Kamus Lokal
+Algoritma
+    val <- q.buffer[q.head]
+    if (q.head = q.tail) then
+        q.head <- IDX_UNDEF
+        q.tail <- IDX_UNDEF
+    else
+        q.head <- q.head+1

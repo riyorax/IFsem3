@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "listdin.h"
 
 /* ********** KONSTRUKTOR ********** */
@@ -202,7 +203,7 @@ void extremeValues(ListDin l, ElType *max, ElType *min){
     int i = IDX_MIN;
     *max = ELMT(l,i);
     *min = ELMT(l,i);
-    for(i; i < NEFF(l); i++){
+    for(i = IDX_MIN; i < NEFF(l); i++){
         if(ELMT(l,i)>*max){
             *max = ELMT(l,i);
         }
