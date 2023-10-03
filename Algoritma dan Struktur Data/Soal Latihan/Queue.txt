@@ -4,10 +4,10 @@ constant CAPACITY: integer = 100
 constant IDX_UNDEF: integer = -1
 
 type ElType <id: integer,
-     cost: integer>
+            cost: integer>
 type Queue < buffer: array [0..CAPACITY-1] of ElType,
-        head : integer,
-        count: integer>
+            head : integer,
+            count: integer>
 
 function isFull (q: Queue) → boolean
 {mengirim true jika q penuh}
@@ -50,20 +50,19 @@ dengan cost berkurang sebesar t }
 Kamus Lokal
 val: ElType
 Algoritma
-    while count>0 do
-        dequeue(q,val)
-        if val.cost <= t then
-            output(val.id “telah selesai diproses”)
-        else
-            val.cost <- val.cost-t
-            enqueue(q,val)
+    dequeue(q,val)
+    if val.cost <= t then
+        output(val.id “telah selesai diproses”)
+    else
+        val.cost <- val.cost-t
+        enqueue(q,val)
 
 No 3
 constant CAPACITY: integer = 100
 constant IDX_UNDEF: integer = -1
 
 type ElType <id: integer,
-    cost: integer>
+            cost: integer>
 
 type Queue < buffer: array [0..CAPACITY-1] of ElType,
        head : integer,
@@ -93,8 +92,8 @@ Algoritma
             q.tail <-q.tail-q.head
             q.head <-0
         found <- false
-        i <- 0
-        while i<q.tail and not found do
+        i <- q.head
+        while i<=q.tail and not found do
             if q.buffer[i].cost = val.cost then
                 i <- i+1
                 found <- true
