@@ -76,3 +76,8 @@ ALGORITMA
         nextToken
     until (endToken)
     output (top(s)) { Menuliskan hasil }
+
+    assign jadi copyKata
+    manfaatkan slide mesin evaluasi ekspresi
+    buat kata to int hasilnya di operasikan
+    buat juga int to kata buat di push ke stack
