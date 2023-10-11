@@ -1,0 +1,44 @@
+procedure readMatrix (output m: Matrix) 
+{ I.S. sembarang} 
+{ F.S. Ukuran efektif dan semua elemen m terdefinisi}
+{ Proses: Membaca masukan ukuran baris dan kolom efektif dari keyboard dan melakukan CreateMatrix dan mengisi nilai efektifnya. 
+Mengisi elemen m dengan pembacaan dari keyboard secara secara traversal per baris. }
+Kamus Lokal
+Algoritma
+    iterate
+        input(nRow,nCol)
+    stop nRow>=1 and nRow <= ROW_CAP and nCol => 1 and nCol <= COL_CAP
+        output("Ukuran baris dan col harus 1..XXXCAP)
+    CreateMatrix(m, nRow, nCol)
+    i iterate[0..nRow-1]
+        j iterate[0..nCol-1]
+            input(elmt)
+            setElmt(m,i,j,elmt)
+
+function isMatrixEqual (m1,m2: Matrix) → boolean 
+{ Mengirimkantrue jika m1 = m2, yaitu ukuran efektif m1 dan m2 sama dan untuk setiap i, j yang merupakan indeks baris dan kolom, m1[i,j]=m2[i,j] }
+Kamus Lokal
+Algoritma
+    if (getRowEff(m1) = getRowEff(m2) && getColEff(m1) = getColEff(m2)) then
+        equal <- true
+        i<-0
+        while i<getRowEff(m1) && equal do
+            j<-0
+            while j<getColEff(m1) && equal do
+                if (getElmt(m1,i,j) != getElmt(m2,i,j)) then
+                    equal <- false
+                j <-j+1
+            i<-i+1
+        ->  equal
+    else
+        -> false
+
+
+function transpose (m: Matrix) → Matrix 
+{ Menghasilkan transpose dari m yaitu setiap elemen m[i,j] ditukar nilainya dengan elemenm[j,i] }
+Kamus Lokal
+Algoritma
+    CreateMatrix(mOut)
+    i iterate[0..getRowEff(m)-1]
+        j iterate[0..getColEff(m)-1]
+        
