@@ -1,0 +1,23 @@
+procedure Duplicate (input/output S: Stack)
+{Menduplikasi elemen top pada stack}
+Kamus Lokal
+Algoritma
+    if not isFull(s) then
+        push(S,InfoTop(s))
+
+function Peek (S: Stack) -> infotype
+{Mengembalikan elemen top dari stack tanpa merubah stack}
+Kamus Lokal
+Algoritma
+    ->InfoTop(s)
+
+procedure Swap(input/output S:Stack)
+Kamus Lokal
+Algoritma
+    pop(s,temp1)
+    if not isEmpty(s) then
+        pop(s,temp2)
+        push(s,temp1)
+        push(s,temp2)
+    else
+        push(s,temp1)

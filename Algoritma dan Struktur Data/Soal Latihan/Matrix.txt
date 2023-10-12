@@ -33,6 +33,21 @@ Algoritma
     else
         -> false
 
+function isSparse (m: matrix) → boolean
+{ Mengirimkan true jika m adalah matriks sparse: matriks “jarang” dengandefinisi: hanya maksimal 5% dari memori matriks yang efektif bukan
+bernilai 0 }
+Kamus Lokal
+Algoritma
+    count <-0
+    banyak_elmt <- getRowEff(m)*getColEff(m)
+    i iterate[0..getRowEff(m)-1]
+        j iterate[0..getColEff(m)-1]
+            if (getElmt(m,i,j) != 0) then
+                count <- count +1
+    if count < 0.05*banyak_elmt then
+        -> true
+    else
+        -> false
 
 function transpose (m: Matrix) → Matrix 
 { Menghasilkan transpose dari m yaitu setiap elemen m[i,j] ditukar nilainya dengan elemenm[j,i] }
@@ -41,4 +56,5 @@ Algoritma
     CreateMatrix(mOut)
     i iterate[0..getRowEff(m)-1]
         j iterate[0..getColEff(m)-1]
-        
+            setElmt(m,i,j,getElmt(m))
+    -> mOut

@@ -1,0 +1,61 @@
+procedure FlipMatriks (input/output M:Matriks)
+Kamus Lokal
+i,j : indeks
+Algoritma
+    i iterate[BrsMin..GetNBrsEff(m)]
+        j iterate[KolMin..GetNKolEff(m)]
+            temp <- getElmt(m,i,j)
+            setElmt(m,i,j,getElmt(m,j,i))
+            setElmt(m,i,j,temp)
+
+function isMatrixDiagonal(M:Matriks)->boolean
+Kamus Lokal
+Algoritma
+    if(GetNBrsEff(m) = GetNKolEff(m)) then
+        valid <- true
+        i <- BrsMin
+        while i<=GetNBrsEff and valid do
+            j <- KolMin
+            while j<=GetNKolEff and valid do
+            if i!=j and getElmt(m,i,j) !=0 then
+                valid <- false
+        -> valid
+    else
+        -> false
+
+UTS 2017
+
+procedure FindElement (input M:Matriks, input x:ElType, output brs, kol :indeks)
+Kamus Lokal
+Algoritma
+    i<- BrsMin
+    found <- false
+    while i<=GetNBrsEff(M) and not false do
+        j<- KolMin
+        while j <=GetNKolEff(M) and not false do
+            if getElmt(M,i,j) = x then
+                brs <- i
+                kol <- j
+                found <- true
+            else
+                j<- j+1
+        if not found then
+            i <- i+1
+    if not found then
+        brs <- -1
+        kol <- -1
+
+function SubMatriks (M: Matriks, RDel: integer, CDel: integer) -> Matriks
+Kamus Lokal
+Algoritma
+    CreateMatrix(GetNBrsEff(M)-1,GetNKolEff(M), subM)
+    idx_row <- 0
+    i iterate[BrsMin..GetNBrsEff(M)]
+        if i != RDel then
+            idx_col <- 0
+            j iterate[KolMin..GetNKolEff(M)]
+                if j != CDel then
+                    setElmt(subM,idx_row,idx_col, getElmt(m,i,j))
+                    idx_col <- idx_col + 1
+            idx_row <- idx_row + 1
+    -> subM
