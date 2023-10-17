@@ -5,6 +5,8 @@ type ElType: integer
 type Set:   < buffer: array[0..CAPACITY-1] of ElType,
               length: integer >
 
+Alternatif 2
+
 function isIn(elmt: ElType, set: Set) -> boolean
 Kamus Lokal
 Algoritma
@@ -44,6 +46,8 @@ function union(S1,S2: Set) -> Set
 Kamus Lokal
 Algoritma
     CreateSet(S)
-    copy(S,S1)
-    
+    copy(S1,S)
+    i <- 0
+    if i < CAPACITY then
+        S.buffer[length+i] <- S2.buffer[i]
     
