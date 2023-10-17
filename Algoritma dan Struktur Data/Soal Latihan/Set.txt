@@ -1,0 +1,49 @@
+constant CAPACITY : integer
+
+type ElType: integer
+
+type Set:   < buffer: array[0..CAPACITY-1] of ElType,
+              length: integer >
+
+function isIn(elmt: ElType, set: Set) -> boolean
+Kamus Lokal
+Algoritma
+    i <- 0
+    found <-false
+    while i<CAPACITY and not found do
+        if set.buffer[i] = elmt then
+            found <- true
+        else
+            i <- i+1
+    -> found
+
+procedure add (input elmt: ElType, input/output set: Set)
+Kamus Lokal
+Algoritma
+    if not isIn(elmt,set) and set,length != CAPACITY then
+        set.buffer[length] <- elmt
+        length <- length + 1
+
+procedure remove (input elmt: ElType, input/output s:Set)
+Kamus Lokal
+Algoritma
+    if isIn(elmt,set) and s.length != 0 then
+        i <- 0
+        found <- false
+        while i < CAPACITY and not found do
+            if set.buffer[i] = elmt then
+                found <- true
+            else
+                i <- i + 1
+        j traversal[length-1..i]
+            set.buffer[j] <- set.buffer[j-1]
+        set.buffer[i] <- elmt
+        set.length <- set.length-1
+
+function union(S1,S2: Set) -> Set
+Kamus Lokal
+Algoritma
+    CreateSet(S)
+    copy(S,S1)
+    
+    
