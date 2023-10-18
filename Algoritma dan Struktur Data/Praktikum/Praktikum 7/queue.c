@@ -33,7 +33,7 @@ int length(Queue q){
         if(IDX_TAIL(q) >= IDX_HEAD(q)){
             return IDX_TAIL(q) - IDX_HEAD(q) +1;
         }else{
-            return (CAPACITY - (IDX_HEAD(q) - IDX_TAIL(q) + 1)) % CAPACITY;
+            return ((CAPACITY - (IDX_HEAD(q) - IDX_TAIL(q))) % CAPACITY) + 1;
         }
     }
 }
@@ -79,15 +79,19 @@ void displayQueue(Queue q){
     /* F.S. Jika q tidak kosong: [e1,e2,...,en] */
     /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
     /* Jika Queue kosong : menulis [] */
-    int i;
-    int j = IDX_HEAD(q);
-    printf("[");
-    for (i = 0; i < length(q); i++){
-        printf("%d", q.buffer[j]);
-        if (i != length(q)-1){
-            printf(",");
+    if (isEmpty(q)){
+        printf("[]\n");
+    }else{
+        int i;
+        int j = IDX_HEAD(q);
+        printf("[");
+        for (i = 0; i < length(q); i++){
+            printf("%d", q.buffer[j]);
+            if (i != length(q)-1){
+                printf(",");
+            }
+            j = (j + 1) % CAPACITY;
         }
-        j = (j + 1) % CAPACITY;
+        printf("]\n");
     }
-    printf("]\n");
 }

@@ -21,3 +21,4 @@ Algoritma
         push(s,temp2)
     else
         push(s,temp1)
+
