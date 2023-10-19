@@ -5,49 +5,55 @@ type ElType: integer
 type Set:   < buffer: array[0..CAPACITY-1] of ElType,
               length: integer >
 
-Alternatif 2
+Alternatif 2 Terurut berdasarkan waktu dilakukan insert.
 
-function isIn(elmt: ElType, set: Set) -> boolean
+function isIn(elmt: ElType, s: Set) -> boolean
 Kamus Lokal
+i: integer
 Algoritma
     i <- 0
     found <-false
     while i<CAPACITY and not found do
-        if set.buffer[i] = elmt then
+        if s.buffer[i] = elmt then
             found <- true
         else
             i <- i+1
     -> found
 
-procedure add (input elmt: ElType, input/output set: Set)
+procedure add (input elmt: ElType, input/output s: Set)
 Kamus Lokal
 Algoritma
-    if not isIn(elmt,set) and set,length != CAPACITY then
-        set.buffer[length] <- elmt
-        length <- length + 1
+    if not isIn(elmt,s) and s.length ≠ CAPACITY then
+        s.buffer[length] <- elmt
+        s.length <- s.length + 1
 
 procedure remove (input elmt: ElType, input/output s:Set)
 Kamus Lokal
+i,j: integer
 Algoritma
-    if isIn(elmt,set) and s.length != 0 then
+    if isIn(elmt,s) and s.length ≠ 0 then
         i <- 0
         found <- false
         while i < CAPACITY and not found do
-            if set.buffer[i] = elmt then
+            if s.buffer[i] = elmt then
                 found <- true
             else
                 i <- i + 1
-        j traversal[length-1..i]
-            set.buffer[j] <- set.buffer[j-1]
-        set.buffer[i] <- elmt
-        set.length <- set.length-1
+        elmt <- s.buffer[i]
+        j traversal[i..s.length-1]
+            s.buffer[j] <- s.buffer[j+1]
+        s.length <- s.length-1
 
 function union(S1,S2: Set) -> Set
+{Menghasilkan set baru yang dimulai dari S1 dan diisi dengan element dari S2, 
+jika S penuh mungkin tidak semua element S2 terdapat di S}
 Kamus Lokal
+i: integer
 Algoritma
     CreateSet(S)
     copy(S1,S)
     i <- 0
-    if i < CAPACITY then
-        S.buffer[length+i] <- S2.buffer[i]
+    while i < CAPACITY and S1.length ≠ CAPACITY do
+        add(S2.buffer[i], S1)
+        i <- i + 1
     
