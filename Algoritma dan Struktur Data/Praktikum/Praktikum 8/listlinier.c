@@ -193,35 +193,37 @@ void displayList(List l){
     /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
     /* Jika list kosong : menulis [] */
     /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-    Address p;
+    Address p = l;
     printf("[");
-    if(!isEmpty(l)){
-        p = FIRST(l);
-        printf("%d", INFO(p));
-        p = NEXT(p);
-        while (p != NULL){
-            printf(",%d", INFO(p));
-            p = NEXT(p);
+    // if(!isEmpty(l)){
+    //     p = FIRST(l);
+    //     printf("%d", INFO(p));
+    //     p = NEXT(p);
+    //     while (p != NULL){
+    //         printf(",%d", INFO(p));
+    //         p = NEXT(p);
+    //     }
+    // }
+    while (p != NULL){
+        if (NEXT(p) != NULL){
+            printf("%d,", INFO(p));
+        }else{
+            printf("%d", INFO(p));
         }
+        p = NEXT(p);
     }
     printf("]");
 }
 
 int length(List l){
     /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
-    Address p;
+    Address p = l;
     int counter;
-    if (isEmpty(l)){
-        return 0;
-    }else{
-        p = FIRST(l);
-        counter = 0;
-        while (NEXT(p) != NULL){
-            counter +=1;
-            p = NEXT(p);
-        }
-        return counter;
+    while(p != NULL){
+        counter +=1;
+        p = NEXT(p);
     }
+    return counter;
 }
 
 /****************** PROSES TERHADAP LIST ******************/
