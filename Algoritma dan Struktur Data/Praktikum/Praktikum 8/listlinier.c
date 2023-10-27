@@ -82,7 +82,7 @@ void insertFirst(List *l, ElType val){
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
     /* Jika alokasi gagal: I.S.= F.S. */
-    List p = newNode(val);
+    Address p = newNode(val);
     if (p != NULL){
         NEXT(p) = FIRST(*l);
         FIRST(*l) = p;
@@ -94,18 +94,19 @@ void insertLast(List *l, ElType val){
     /* F.S. Melakukan alokasi sebuah elemen dan */
     /* menambahkan elemen list di akhir: elemen terakhir yang baru */
     /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
-    List last;
-    if (isEmpty(*l)){
-        insertFirst(l,val);
-    }else{
-        List p = newNode(val);
-        if(p != NULL){
-            last = FIRST(*l);
-            while (NEXT(last) != NULL){
-                last = NEXT(last);
-            }
-            NEXT(last) = p;
+    Address p;
+    p = newNode(val);
+    if (p != NULL){
+        if (isEmpty(*l)){
+            insertFirst(l,val);
         }
+        else{
+            Address p2 = *l;
+            while (NEXT(p2) != NULL){
+                p2 = NEXT(p2);
+            }
+            NEXT(p2) = p;
+        }   
     }
 }
 
@@ -218,7 +219,7 @@ void displayList(List l){
 int length(List l){
     /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
     Address p = l;
-    int counter;
+    int counter=0;
     while(p != NULL){
         counter +=1;
         p = NEXT(p);
