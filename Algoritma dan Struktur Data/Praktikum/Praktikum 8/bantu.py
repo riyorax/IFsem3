@@ -250,4 +250,4 @@ array = [0 for i in range(100)]
 
 array[0] = ["asep", 1]
 
-pri
+pri 
