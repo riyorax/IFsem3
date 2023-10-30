@@ -27,8 +27,8 @@ Address allocate(ElType val){
     /* Jika alokasi gagal, mengirimkan NULL */
     Address p = (Address) malloc(sizeof(ElmtList));
     if(p != NULL){
-        INFO(p) == val;
-        NEXT(p) == NULL;
+        INFO(p) = val;
+        NEXT(p) = NULL;
     }
     return p;
 }
@@ -58,7 +58,7 @@ Address search(List l, ElType val){
                 p = NEXT(p);
             }
         }
-        if(found){
+        if(found){ 
             return p;
         }else{
             return NULL;
@@ -71,12 +71,12 @@ boolean addrSearch(List l, Address p){
     /* Mengirimkan true jika ada, false jika tidak ada */
     Address q = FIRST(l);
     if (isEmpty(l)){
-        return NULL;
+        return false;
     }else{
         boolean found = false;
         while (NEXT(q) != FIRST(l) && !found){
-            if(q=p){
-                found - true;
+            if(q==p){
+                found = true;
             }else{
                 q = NEXT(q);
             }
@@ -138,7 +138,7 @@ void deleteFirst(List *l, ElType * val){
     Address p = FIRST(*l);
     *val = INFO(p);
     if(NEXT(FIRST(*l)) == FIRST(*l)){
-        FIRST(*l) == NULL;
+        FIRST(*l) = NULL;
     }else{
         Address q = FIRST(*l);
         while (NEXT(q) != FIRST(*l)){
@@ -146,6 +146,7 @@ void deleteFirst(List *l, ElType * val){
         }
         FIRST(*l) = NEXT(FIRST(*l));
         NEXT(q) = FIRST(*l);
+        deallocate(p);
     }
 }
 
@@ -162,7 +163,7 @@ void deleteLast(List *l, ElType * val){
         p = NEXT(p);
     }
     if(prev == NULL){
-        FIRST(*l) == NULL;
+        FIRST(*l) = NULL;
     }else{
         NEXT(prev) = FIRST(*l);
     }
