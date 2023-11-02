@@ -58,6 +58,9 @@ Address search(List l, ElType val){
                 p = NEXT(p);
             }
         }
+        if(INFO(p) == val){
+            found = true;
+        }
         if(found){ 
             return p;
         }else{
@@ -171,7 +174,6 @@ void deleteLast(List *l, ElType * val){
     deallocate(p);
 }
 
-
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 void displayList(List l){
     /* I.S. List mungkin kosong */
@@ -179,15 +181,16 @@ void displayList(List l){
     /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
     /* Jika list kosong : menulis [] */
     /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-    printf("[");
-    if(!isEmpty(l)){
-        Address p = FIRST(l);
-        printf("%d", INFO(p));
-        p = NEXT(p);
+    Address p = FIRST(l);
+    if(isEmpty(l)){
+        printf("[]");
+    }else{
+        printf("[");
         while (NEXT(p) != FIRST(l)){
-            printf(",%d", INFO(p));
+            printf("%d,", INFO(p));
             p = NEXT(p);
         }
+        printf("%d", INFO(p));
+        printf("]");
     }
-    printf("]");
 }
