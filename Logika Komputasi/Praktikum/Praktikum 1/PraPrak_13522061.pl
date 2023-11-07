@@ -84,7 +84,6 @@ saudaratiri(X,Y):-
     C \= D,
     A = C,
     B \= D.
-    
 
 kakak(X,Y):-
     saudara(X,Y),
@@ -124,6 +123,11 @@ anakbungsu(X,Y):-
     \+kakak(X,_).
 
 yatimpiatu(X):-
+    pria(X),
+    \+anak(X,_).
+
+yatimpiatu(X):-
+    wanita(X),
     \+anak(X,_).
 
 /*BAGIAN II: Rekursivitas*/
@@ -213,3 +217,49 @@ sum([H|T],Sum):-
 
 /*List Manipulation*/
 
+getIndex([H|T],SearchedElement,Index):-
+    H = SearchedElement,!,
+    Index is 1.
+getIndex([H|T],SearchedElement,Index):-
+    H \= SearchedElement,
+    getIndex(T,SearchedElement,NewIndex),
+    Index is NewIndex + 1.  
+
+getElement(List, 1, Result):-
+    List = [H|T],
+    Result is H,!.
+getElement(List, Index, Result):-
+    List = [H|T],
+    A is Index - 1,
+    getElement(T, A, Result).
+
+setElement(List, 1, Element, NewList) :-
+    List = [H|T],
+    NewList = [Element|T],!.
+setElement(List, Index, Element, NewList) :-
+    List = [H|T],
+    A is Index - 1,
+    setElement(T, A, Element, Temp),
+    NewList = [H|Temp].
+
+swap(List,Index,Index, List):-!.
+swap(List,Index1,Index2,NewList):-
+    Index2 < Index1,
+    swap(List,Index2,Index1,NewList).
+swap(List,Index1,Index2,NewList):-
+    getElement(List,Index1,X1),
+    getElement(List,Index2,X2),
+    setElement(List,Index1,X2,TempList1),
+    setElement(TempList1,Index2,X1,NewList),!.
+
+slice(_,Start,End,[]) :-
+    Start >= End.
+slice([], _, _, []).
+slice([H|T],1,End,[H|Result]) :-
+    Next is End - 1,
+    slice(T,1,Next,Result).
+slice([H|T],Start,End,Result) :-
+    Start > 1,
+    NewStart is Start - 1,
+    NewEnd is End - 1,
+    slice(T,NewStart,NewEnd,Result).

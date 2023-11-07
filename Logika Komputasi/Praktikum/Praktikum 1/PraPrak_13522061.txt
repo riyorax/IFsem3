@@ -1,0 +1,55 @@
+3a Suami dari Margot
+Query: menikah(margot,X),pria(X).
+
+X = henri
+
+3b Kakek buyut dan nenek buyut dari Daniel
+Query: anak(daniel,_X),wanita(_X),nenek(Y,_X),menikah(Z,Y).
+
+Y = joli
+Z = athif
+
+3c Paman dari orang tua Rupert
+Query: anak(rupert,_X),wanita(_X),anak(_X,_Y),wanita(_Y),saudara(Z,_Y).
+
+Z = michael
+
+3d Orang yang memiliki lebih dari satu istri
+Query: menikah(X,_Y),menikah(X,_Z),_Y\=_Z.
+
+X = fio
+
+3e Saudara tiri tertua dari Emma
+Query: saudara(emma,X),saudara(emma,_Y),X\=_Y,kakak(X,_Y).
+
+X = daniel.
+
+3f Orang tua yang memiliki tepat satu anak
+Query: anak(_X,Y),\+ (saudara(_X,_Z),anak(_Z,Y)).
+
+Y = dillon
+
+Y = elysia
+
+Y = jeni
+
+3g Pria yang memiliki mertua berusia lebih dari 50 tahun
+Query: mertua(_X,Y),usia(_X,_UsiaX),_UsiaX > 50.
+
+Y = henri
+
+3h Orang yatim piatu dengan usia termuda
+Query: yatimpiatu(X), usia(X,_UsiaX),\+ (yatimpiatu(_Second),usia(_Second,_Usia2), _Usia2 < _UsiaX). 
+
+X = fio
+
+3i Orang diatas 25 tahun yang statusnya menikah dengan orang yang memiliki saudara lebih dari 1 orang
+Query: usia(X,_UsiaX),_UsiaX > 25, menikah(X,_Pasangan),saudara(_Pasangan,_Saudara1),saudara(_Pasangan,_Saudara2),_Saudara1 \= _Saudara2.
+
+X = fio
+
+3j Seluruh keturunan Athif yang memiliki tepat 2 keponakan
+Query: keturunan(X, athif), keponakan(_X, X), keponakan(_Y, X), _X \== _Y, \+ (keponakan(_Z, X), _Z \== _X, _Z \== _Y).
+
+X = robert
+X = bagas
