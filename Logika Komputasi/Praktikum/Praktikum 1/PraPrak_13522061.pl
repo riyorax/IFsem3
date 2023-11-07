@@ -45,6 +45,8 @@ menikah(henri,margot).
 menikah(margot,henri).
 menikah(jena,fio).
 menikah(fio,jena).
+menikah(jeni,fio).
+menikah(fio,jeni).
 
 anak(margot,athif).
 anak(margot,joli).
@@ -73,7 +75,16 @@ saudara(X,Y):-
     anak(Y,Z),
     X \= Y.
 
-
+saudaratiri(X,Y):-
+    anak(X,A),
+    anak(X,B),
+    anak(Y,C),
+    anak(Y,D),
+    A \= B,
+    C \= D,
+    A = C,
+    B \= D.
+    
 
 kakak(X,Y):-
     saudara(X,Y),
@@ -101,6 +112,11 @@ keturunan(X,Y):-
     keturunan(Z,Y).
 
 lajang(X):-
+    pria(X),
+    \+menikah(X,_).
+
+lajang(X):-
+    wanita(X),
     \+menikah(X,_).
 
 anakbungsu(X,Y):-
@@ -119,13 +135,29 @@ exponent(X,Y,Z):-
     Z is X*B.
 
 /*Population*/
+population(P,_,0,_,P).
+population(P,R,T,C,X):-
+    NewT is T-1,
+    B is T mod 2,
+    B =:= 0,
+    NewC is C+1,
+    NewP is P*R-NewC,
+    population(NewP,R,NewT,NewC,X),!.
+    
+population(P,R,T,C,X):-
+    NewT is T-1,
+    B is T mod 2,
+    B =:= 1,
+    NewC is C+1,
+    NewP is P*R+NewC,
+    population(NewP,R,NewT,NewC,X),!.
 
 /*Perrin*/
 perrin(0,3).
 perrin(1,0).
 perrin(2,2).
 perrin(N,X):-
-    A is N-1,
+    A is N-2,
     B is N-3,
     perrin(A,X1),
     perrin(B,X2),
@@ -178,4 +210,6 @@ sum([],0):-!.
 sum([H|T],Sum):-
     sum(T,X),
     Sum is H+X.
+
+/*List Manipulation*/
 

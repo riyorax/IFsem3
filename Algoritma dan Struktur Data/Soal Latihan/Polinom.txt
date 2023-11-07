@@ -1,0 +1,23 @@
+constant nMax: integer = 100 { Derajat tertinggi polinom yang diproses }
+type Polinom: ⟨ degree: integer,
+                arrSuku: array [0..nMax] of integer 
+
+procedure addPol(input p1,p2: Polinom, output p3: Polinom)
+Kamus Lokal
+Algoritma
+    if p1.degree> p2.degree then
+        maxDeg <- p1.degree
+    else
+        maxDeg <- p2.degree
+    CreatePolinom(p3)
+    i iterate[0..maxDeg]
+        p3.arrSuku[i] <- p1.arrSuku[i] + p2.arrSuku[i]
+    adjustDegree(p3)
+
+procedure derivPol (input p: polinom, output p1: polinom)
+Kamus Lokal
+Algoritma
+    CreatePolinom(p1)
+    i iterate[p.degree..1]
+        p1.arrSuku[i-1] <- i*p.arrSuku[i]
+    adjustDegree(p1)
