@@ -73,8 +73,7 @@ saudara(X,Y):-
     anak(Y,Z),
     X \= Y.
 
-saudaratiri(X,Y):-
-    
+
 
 kakak(X,Y):-
     saudara(X,Y),
@@ -87,7 +86,7 @@ keponakan(X,Y):-
     saudara(Y,Z).
 
 mertua(X,Y):-
-    anak(Z,X)
+    anak(Z,X),
     menikah(Y,Z).
 
 nenek(X,Y):-
@@ -113,7 +112,7 @@ yatimpiatu(X):-
 
 /*BAGIAN II: Rekursivitas*/
 /*Exponent*/
-exponent(X,0,1).
+exponent(_,0,1).
 exponent(X,Y,Z):-
     A is Y-1,
     exponent(X,A,B),
@@ -145,37 +144,37 @@ hcf(A,B,X):-
 
 /*BAGIAN III: List*/
 /*List Statistic*/
-min([H|T],H):-T=[],!
+min([H|T],H):-T=[],!.
 min([H|T],A):-
     min(T,B),
-    H<=B,
-    A is H,!
+    H=<B,
+    A is H,!.
 min([H|T],A):-
     min(T,B),
     H>B,
-    A is B,!
+    A is B,!.
 
-max([H|T],H):-T=[],!
+max([H|T],H):-T=[],!.
 max([H|T],A):-
     max(T,B),
     H>=B,
-    A is H,!
+    A is H,!.
 max([H|T],A):-
     max(T,B),
     H<B,
-    A is B,!
+    A is B,!.
 
 range(List,Range):-
     min(List,Min),
     max(List,Max),
     Range is Max-Min.
 
-count([H|T],1):-T=[],!
-count([H|T],Count):-
+count([],0):-!.
+count([_|T],Count):-
     count(T,X),
     Count is 1+X.
 
-sum([H|T],H):-T=[],!
+sum([],0):-!.
 sum([H|T],Sum):-
     sum(T,X),
     Sum is H+X.
