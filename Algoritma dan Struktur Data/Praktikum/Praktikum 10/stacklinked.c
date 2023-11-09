@@ -17,7 +17,7 @@ Address newNode(ElType x){
 /* ********* PROTOTYPE REPRESENTASI LOJIK STACK ***************/
 boolean isEmpty(Stack s){
     /* Mengirim true jika Stack kosong: TOP(s) = NIL */
-    return TOP(s) == NIL;
+    return ADDR_TOP(s) == NULL;
 }
 
 int length(Stack s){
@@ -34,7 +34,7 @@ int length(Stack s){
 void CreateStack(Stack *s){
     /* I.S. sembarang */ 
     /* F.S. Membuat sebuah stack s yang kosong */
-    TOP(*s) = NIL;
+    ADDR_TOP(*s) = NIL;
 }
 
 void DisplayStack(Stack s){
