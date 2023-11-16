@@ -1,0 +1,71 @@
+type ElType: integer
+type Address: pointer to TreeNode
+
+type BinTree: Address
+type TreeNode: < info: ElType, { simpul/akar }
+left: BinTree, { subpohon kiri }
+right: BinTree { subpohon kanan } >
+
+type BinTree: Address
+type TreeNode: < info: ElType, { simpul/akar }
+left: BinTree, { subpohon kiri }
+right: BinTree { subpohon kanan } >
+
+{ Tambahan struktur data list untuk pengelolaan elemen pohon }
+type Node: < info: ElType,
+next: AddressList >
+type NodeList: AddressList
+{ list linier yang elemennya adalah Node }
+
+function search (P: BinTree, X: ElType) → boolean
+{ Mengirimkan true jika ada node dari P yang bernilai X }
+Kamus Lokal
+
+Algoritma
+    if isTreeEmpty(P) then
+        ->false
+    if Info(P) = X then
+        ->true
+    else
+        ->(search(Left(p),X) or search(Right(P),X))
+    
+    left <- search(Left(P),X)
+    if left then
+        ->true
+    right <- search(Right(P),X)
+    if right then
+        -> true
+    ->false
+
+
+function isSkewLeft (P: BinTree) → boolean
+{ Mengirimkan true jika P adalah pohon condong kiri }
+Kamus Lokal
+
+Algoritma
+    -> nbElmt(Left(p)) > nbElmt(Right(p))
+
+
+function isSkewRight (P: BinTree) → boolean
+{ Mengirimkan true jika P adalah pohon condong kanan }
+Kamus Lokal
+Algoritma
+    if(not isTreeEmpty(P)) then
+        if(isOneElmt(P)) then
+            
+
+
+function level (P: BinTree, X: ElType) → integer
+{ Mengirimkan level dari node X yang merupakan salah satu daun dari pohon biner P.
+Akar(P) level-nya adalah 1. Pohon P tidak kosong dan elemen-elemennya unik. }
+Kamus Lokal
+
+Algoritma
+    if (Akar(P) = X) then
+        ->1
+    else
+        if (search(Left(P),X)) then
+            -> 1 + level(Left(P),X)
+        else
+            1 + level(Right(P),X)
+
